@@ -4,7 +4,7 @@ app = "deno-api-app"
 kill_signal = "SIGINT"
 kill_timeout = 5
 [processes]
-  app = "run --allow-net src/index.ts"
+  app = "run --allow-net --allow-read --allow-env src/index.ts"
 
 [env]
 

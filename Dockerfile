@@ -13,4 +13,4 @@ RUN deno cache src/deps.ts
 
 COPY src/index.ts ./
 
-CMD ["run", "--allow-net", "src/index.ts"]
+CMD ["run", "--allow-net","--allow-read","--allow-env", "src/index.ts"]
