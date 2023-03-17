@@ -8,3 +8,10 @@ Deno.test("GET /", async () => {
 	const body = await res.json();
 	assertEquals(body, "Hello World!");
 });
+
+Deno.test("GET /notes", async () => {
+	const res = await fetch(testUrl + "/notes");
+	assertEquals(res.status, 200);
+	const body = await res.json();
+	assertEquals(body, "Hello World from notes");
+});

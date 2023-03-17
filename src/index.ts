@@ -26,6 +26,11 @@ app.get("/", (_req: Request, res: Response, _next: Function) => {
 	res.status(200).json("Hello World!");
 });
 
+//@ts-ignore
+app.get("/notes", (_req: Request, res: Response, _next: Function) => {
+	res.status(200).json("Hello World from notes");
+});
+
 app.listen(8080, () => {
 	console.log("Server listening on port 8080");
 });
