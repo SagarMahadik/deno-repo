@@ -15,3 +15,10 @@ Deno.test("GET /notes", async () => {
 	const body = await res.json();
 	assertEquals(body, "Hello World from notes");
 });
+
+Deno.test("GET /users", async () => {
+	const res = await fetch(testUrl + "/users");
+	assertEquals(res.status, 200);
+	const body = await res.json();
+	assertEquals(body, "Hello World from users");
+});
