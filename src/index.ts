@@ -6,7 +6,7 @@ const app = new Application();
 const router = new Router();
 
 router.get("/", (context) => {
-	context.response.body = "Hello World!";
+	context.response.body = "Hello World from dev branch";
 });
 
 app.use(oakCors());
