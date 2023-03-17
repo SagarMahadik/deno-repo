@@ -1,16 +1,31 @@
-import { Application, Router } from "https://deno.land/x/oak@v11.1.0/mod.ts";
-import { oakCors } from "https://deno.land/x/cors@v1.2.2/mod.ts";
+// import { Application, Router } from "./deps.ts";
+// import { oakCors } from "./deps.ts";
 
-const app = new Application();
+// const app = new Application();
 
-const router = new Router();
+// const router = new Router();
 
-router.get("/", (context) => {
-	context.response.body = "Hello World from dev branch";
+// router.get("/", (context) => {
+// 	context.response.body = "Hello World!";
+// });
+
+// app.use(oakCors());
+// app.use(router.routes());
+// app.use(router.allowedMethods());
+
+// await app.listen({ port: 8080 });
+
+// deno-lint-ignore-file
+// @deno-types="npm:@types/express@4"
+import express, { Response } from "npm:express@4.18.2";
+
+const app = express();
+
+//@ts-ignore
+app.get("/", (_req: Request, res: Response, _next: Function) => {
+	res.status(200).json("Hello World!");
 });
 
-app.use(oakCors());
-app.use(router.routes());
-app.use(router.allowedMethods());
-
-await app.listen({ port: 8000 });
+app.listen(8080, () => {
+	console.log("Server listening on port 8080");
+});
