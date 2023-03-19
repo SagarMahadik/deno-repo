@@ -20,10 +20,13 @@
 import express, { Response } from "npm:express@4.18.2";
 
 const app = express();
+import "https://deno.land/x/dotenv@v3.2.2/load.ts";
+
+const message = Deno.env.get("MESSAGE") || "Hello World!";
 
 //@ts-ignore
 app.get("/", (_req: Request, res: Response, _next: Function) => {
-	res.status(200).json("Hello World!");
+	res.status(200).json(message);
 });
 
 //@ts-ignore
@@ -39,3 +42,5 @@ app.get("/users", (_req: Request, res: Response, _next: Function) => {
 app.listen(8080, () => {
 	console.log("Server listening on port 8080");
 });
+
+export default app;
