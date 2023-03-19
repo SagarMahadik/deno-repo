@@ -16,6 +16,6 @@ jobs:
         with:
           deno-version: v1.x
       - name: Start server
-        run: deno run --allow-net --allow-read --allow-write --unstable server.ts &
+        run: deno run --allow-net --allow-read --allow-write --unstable src/index.ts &
       - name: Run tests
         run: deno test --allow-net --allow-read --allow-write --unstable
