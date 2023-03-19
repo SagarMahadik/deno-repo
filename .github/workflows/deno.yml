@@ -17,5 +17,7 @@ jobs:
           deno-version: v1.x
       - name: Start server
         run: deno run --allow-net --allow-read --allow-write --unstable src/index.ts &
+      - name: Wait for server
+        run: deno run --allow-net --unstable tools/wait_on.ts http://localhost:8080
       - name: Run tests
         run: deno test --allow-net --allow-read --allow-write --unstable
