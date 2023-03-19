@@ -9,7 +9,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      API_KEY: ${{ secrets.MESSAGE }}
+      MESSAGE: ${{ secrets.MESSAGE }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
