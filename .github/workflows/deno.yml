@@ -1,0 +1,25 @@
+name: Deno CI
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      MESSAGE: ${{ secrets.MESSAGE }}
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+      - name: Start server
+        run: deno run -A src/index.ts &
+      - name: Wait for server
+        run: deno run -A tools/wait_on.ts http://localhost:8080
+      - name: Run tests
+        run: deno test -A

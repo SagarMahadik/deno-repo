@@ -6,7 +6,7 @@ Deno.test("GET /", async () => {
 	const res = await fetch(testUrl);
 	assertEquals(res.status, 200);
 	const body = await res.json();
-	assertEquals(body, "Hello World!");
+	assertEquals(body, "This is Development mode");
 });
 
 Deno.test("GET /notes", async () => {
@@ -15,3 +15,21 @@ Deno.test("GET /notes", async () => {
 	const body = await res.json();
 	assertEquals(body, "Hello World from notes");
 });
+
+Deno.test("GET /users", async () => {
+	const res = await fetch(testUrl + "/users");
+	assertEquals(res.status, 200);
+	const body = await res.json();
+	assertEquals(body, "Hello World from users");
+});
+
+// import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
+// import { superdeno } from "https://deno.land/x/superdeno/mod.ts";
+// import app from "../index.ts";
+
+// Deno.test("GET / should return 'Hello World!'", async () => {
+// 	const res = await superdeno(app).get("/");
+// 	console.log(res);
+// 	assertEquals(res.status, 200);
+// 	assertEquals(res.body, "This is Development mode");
+// });
