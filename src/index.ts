@@ -10,6 +10,11 @@ router.get("/", (context) => {
 	context.response.body = { message: "Hello World!" };
 });
 
+router.get("/note", (context) => {
+	console.log("Hello World!");
+	context.response.body = { message: "Hello World!" };
+});
+
 app.use(oakCors());
 app.use(router.routes());
 app.use(router.allowedMethods());
