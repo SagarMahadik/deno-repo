@@ -6,6 +6,7 @@ const app = new Application();
 const router = new Router();
 
 router.get("/", (context) => {
+	console.log("Hello World!");
 	context.response.body = { message: "Hello World!" };
 });
 
