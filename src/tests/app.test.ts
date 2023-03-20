@@ -23,12 +23,12 @@ Deno.test("GET /users", async () => {
 	assertEquals(body, "Hello World from users");
 });
 
-
 Deno.test("GET /test", async () => {
 	const res = await fetch(testUrl + "/test");
 	assertEquals(res.status, 200);
 	const body = await res.json();
 	assertEquals(body, "Hello World from test");
+});
 
 Deno.test("GET /health", async () => {
 	const res = await fetch(testUrl + "/health");
@@ -37,7 +37,6 @@ Deno.test("GET /health", async () => {
 	assertEquals(body, {
 		status: "UP",
 	});
-
 });
 
 // import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
