@@ -21,9 +21,19 @@ jobs:
           deno-version: v1.x
 
       - name: Install deployctl
-        run: deno install --allow-read --allow-write --allow-env --allow-net --allow-run --no-check -r -f https://deno.land/x/deploy/deployctl.ts
+        run: deno install --allow-read --allow-write --allow-env --allow-net --allow-run --no-check -r -A -n deployctl https://deno.land/x/deploy/mod.ts
 
-      - name: Deploy to Deno Deploy
+      - name: Deploy preview
+        id: deploy-preview
         env:
           DENO_DEPLOY_TOKEN: ${{ secrets.DENO_DEPLOY_TOKEN }}
-        run: deployctl deploy src/index.ts --project deno-api-uat --token $DENO_DEPLOY_TOKEN --type production
+        run: |
+          OUTPUT=$(deployctl deploy src/index.ts --name deno-api-uat --token $DENO_DEPLOY_TOKEN --project deno-api-uat  --type preview)
+          echo "$OUTPUT"
+          DEPLOYMENT_ID=$(echo "$OUTPUT" | grep -oP 'https://dash.deno.com/projects/[^/]+/deployments/\K[^"]+')
+          echo "DEPLOYMENT_ID=$DEPLOYMENT_ID" >> $GITHUB_ENV
+
+      - name: Promote to production
+        env:
+          DENO_DEPLOY_TOKEN: ${{ secrets.DENO_DEPLOY_TOKEN }}
+        run: deployctl promote ${{ env.DEPLOYMENT_ID }} --token $DENO_DEPLOY_TOKEN
