@@ -1,65 +1,18 @@
-// import { Application, Router } from "./deps.ts";
-// import { oakCors } from "./deps.ts";
+import { Application, Router } from "./deps.ts";
+import { oakCors } from "./deps.ts";
 
-// const app = new Application();
+const app = new Application();
 
-// const router = new Router();
+const router = new Router();
 
-// router.get("/", (context) => {
-// 	context.response.body = "Hello World!";
-// });
-
-// app.use(oakCors());
-// app.use(router.routes());
-// app.use(router.allowedMethods());
-
-// await app.listen({ port: 8080 });
-
-// deno-lint-ignore-file
-// @deno-types="npm:@types/express@4"
-import express, { Response } from "npm:express@4.18.2";
-
-const app = express();
-import "https://deno.land/x/dotenv@v3.2.2/load.ts";
-
-const message = Deno.env.get("MESSAGE") || "Hello World!";
-
-//@ts-ignore
-app.get("/", (_req: Request, res: Response, _next: Function) => {
-	console.log("Hello World!");
-	res.status(200).json(message);
+router.get("/", (context) => {
+	context.response.body = { message: "Hello World!" };
 });
 
-app.get("/health", (_req: Request, res: Response, _next: Function) => {
-	res.status(200).json({
-		status: "UP",
-	});
-});
+app.use(oakCors());
+app.use(router.routes());
+app.use(router.allowedMethods());
 
-//@ts-ignore
-app.get("/notes", (_req: Request, res: Response, _next: Function) => {
-	res.status(200).json("Hello World from notes");
-});
-
-//@ts-ignore
-app.get("/users", (_req: Request, res: Response, _next: Function) => {
-	res.status(200).json("Hello World from users");
-});
-
-app.get("/test", (_req: Request, res: Response, _next: Function) => {
-	res.status(200).json("Hello World from test");
-});
-
-app.get("/feat-6", (_req: Request, res: Response, _next: Function) => {
-	res.status(200).json("Hello World from feat-6");
-});
-
-app.get("/feat-5", (_req: Request, res: Response, _next: Function) => {
-	res.status(200).json("Hello World from feat-5");
-});
-
-app.listen(8080, () => {
-	console.log("Server listening on port 8080");
-});
+await app.listen({ port: 8080 });
 
 export default app;
