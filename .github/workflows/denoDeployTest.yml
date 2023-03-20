@@ -21,7 +21,7 @@ jobs:
           deno-version: v1.x
 
       - name: Install deployctl
-        run: deno install --allow-read --allow-write --allow-env --allow-net --allow-run --no-check -r -A -n deployctl https://deno.land/x/deploy/mod.ts
+        run: deno install --allow-read --allow-write --allow-env --allow-net --allow-run --no-check -r -f https://deno.land/x/deploy/deployctl.ts
 
       - name: Deploy preview
         id: deploy-preview
