@@ -26,6 +26,7 @@ const message = Deno.env.get("MESSAGE") || "Hello World!";
 
 //@ts-ignore
 app.get("/", (_req: Request, res: Response, _next: Function) => {
+	console.log("Hello World!");
 	res.status(200).json(message);
 });
 
@@ -49,14 +50,12 @@ app.get("/test", (_req: Request, res: Response, _next: Function) => {
 	res.status(200).json("Hello World from test");
 });
 
-
 app.get("/feat-6", (_req: Request, res: Response, _next: Function) => {
 	res.status(200).json("Hello World from feat-6");
-  });
+});
 
 app.get("/feat-5", (_req: Request, res: Response, _next: Function) => {
 	res.status(200).json("Hello World from feat-5");
-
 });
 
 app.listen(8080, () => {

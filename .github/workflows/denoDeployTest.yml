@@ -1,0 +1,27 @@
+name: Deploy to Deno Deploy
+
+on:
+  workflow_run:
+    workflows: ["Deno CI"]
+    branches: [dev]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Install deployctl
+        run: deno install --allow-read --allow-write --allow-env --allow-net --allow-run --no-check -r -f https://deno.land/x/deploy/deployctl.ts
+
+      - name: Deploy to Deno Deploy
+        run: deployctl deploy .github/workflows/deploy.ts ${{ secrets.DENO_DEPLOY_TOKEN }}
