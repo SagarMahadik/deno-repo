@@ -23,6 +23,15 @@ Deno.test("GET /users", async () => {
 	assertEquals(body, "Hello World from users");
 });
 
+Deno.test("GET /health", async () => {
+	const res = await fetch(testUrl + "/health");
+	assertEquals(res.status, 200);
+	const body = await res.json();
+	assertEquals(body, {
+		status: "UP",
+	});
+});
+
 // import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
 // import { superdeno } from "https://deno.land/x/superdeno/mod.ts";
 // import app from "../index.ts";
