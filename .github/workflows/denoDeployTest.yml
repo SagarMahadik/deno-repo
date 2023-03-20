@@ -26,4 +26,4 @@ jobs:
       - name: Deploy to Deno Deploy
         env:
           DENO_DEPLOY_TOKEN: ${{ secrets.DENO_DEPLOY_TOKEN }}
-        run: deployctl deploy src/index.ts --project deno-api-uat --token $DENO_DEPLOY_TOKEN
+        run: deployctl deploy src/index.ts --project deno-api-uat --token $DENO_DEPLOY_TOKEN --type production
