@@ -29,6 +29,12 @@ app.get("/", (_req: Request, res: Response, _next: Function) => {
 	res.status(200).json(message);
 });
 
+app.get("/health", (_req: Request, res: Response, _next: Function) => {
+	res.status(200).json({
+		status: "UP",
+	});
+});
+
 //@ts-ignore
 app.get("/notes", (_req: Request, res: Response, _next: Function) => {
 	res.status(200).json("Hello World from notes");
